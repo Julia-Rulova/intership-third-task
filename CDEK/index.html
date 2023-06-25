@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Пример работы виджета ПВЗ</title>
+    <script type="text/javascript" src="https://widget.cdek.ru/widget/widjet.js" id="ISDEKscript"></script>
+</head>
+
+<body>
+    <script>
+        var widjet = new ISDEKWidjet({
+            defaultCity: 'Москва',
+            cityFrom: 'Москва',
+            country: 'Россия',
+            inregion: true,
+            link: 'forpvz',
+            path: 'https://widget.cdek.ru/widget/scripts/',
+            servicepath: 'https://widget.cdek.ru/widget/scripts/service.php',
+            onChoose: onChoose,
+            detailAddress: true,
+            onChooseAddress: onChooseAddress
+        });
+
+        function onChoose(wat) {
+            let res = confirm(
+                'Выбран пункт выдачи заказа ' + wat.id + "\n" +
+                'цена ' + wat.price + "\n" +
+                'срок ' + wat.term + " дн.\n" +
+                'город ' + wat.cityName + ', код города ' + wat.city
+            );
+
+            if (res) {
+                console.log(wat);
+            }
+        }
+
+        function onChooseAddress(wat) {
+            let res = confirm('Выбрана доставка курьером по адресу ' + wat.address + "\n" +
+                'цена ' + wat.price + "\n" +
+                'срок ' + wat.term + ' дн.'
+            );
+
+            if (res) {
+                console.log(wat);
+            }
+        }
+    </script>
+
+    <div id="forpvz" style="height:600px;"></div>
+
+</body>
+
+</html>
